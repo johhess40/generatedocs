@@ -136,7 +136,7 @@ func DataSourceLinks(r *tfconfig.Resource) string{
 	return fmt.Sprintf("https://registry.terraform.io/providers/hashicorp/%s/latest/docs/data-sources/%s", r.Provider.Name, strings.TrimPrefix(r.Type, fmt.Sprintf("%s_", r.Provider.Name)))
 }
 
-//GetDirData iterates through directories and returns data about each directory
+//GetDirData iterates through directories and returns data about each assets
 func GetDirData(s string) (RepoInfo, error){
 	var dirs RepoInfo
 	get, err := GetDirs(s)

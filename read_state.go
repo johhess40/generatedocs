@@ -86,7 +86,7 @@ func GetTfcState(s StateProviders) (CloudState,error) {
 
 	n, err = ManipulateTfcState(state)
 	if err != nil {
-		return n, fmt.Errorf("failed to unmarshal JSON for %s response, please check type State for formatting", resp.Request.URL)
+		return n, fmt.Errorf(err.Error())
 	}
 
 	return n, nil
@@ -120,7 +120,7 @@ func ManipulateTfcState(t TfcState)(CloudState,error){
 
 	err = json.Unmarshal(response, &s)
 	if err != nil {
-		return s, fmt.Errorf("failed to unmarshal JSON for %s response, please check type State for formatting", resp.Request.URL)
+		return s, fmt.Errorf("failed to unmarshal JSON for ManipulateTfcState %s response, please check type State for formatting", resp.Request.URL)
 	}
 
 	return s, nil
@@ -237,8 +237,8 @@ func GetGcpState(s StateProviders) (CloudState, error) {
 	request.Header.Add("Authorization", bearer)
 
 	client := &http.Client{}
-	resp, err := client.Do(request)
-	if err != nil {
+	resp, errReq := client.Do(request)
+	if errReq != nil {
 		return state, fmt.Errorf(err.Error())
 	}
 	defer func(Body io.ReadCloser) {
@@ -247,8 +247,8 @@ func GetGcpState(s StateProviders) (CloudState, error) {
 			log.Fatal(err)
 		}
 	}(resp.Body)
-	response, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
+	response, errResp := ioutil.ReadAll(resp.Body)
+	if errResp != nil {
 		return state, fmt.Errorf(err.Error())
 	}
 

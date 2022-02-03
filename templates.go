@@ -101,8 +101,8 @@ const TerraDocGeneric = `
 <tr>
 <td>{{.VarName}}</td>
 <td>{{.VarType}}</td>
-<td>{{.VarDescription}}</td>
 <td>{{.VarDefault}}</td>
+<td>{{.VarDescription}}</td>
 <td>{{.VarRequired}}</td>
 <td>{{.VarSensitive}}</td>
 <td>{{.SourcePositionFileName}}</td>
